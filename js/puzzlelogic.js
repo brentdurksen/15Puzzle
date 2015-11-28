@@ -49,7 +49,7 @@ function initPuzzle() {
 
 function shufflePuzzle() {
     /* 'Click' at random 100,000 times */
-    for (j = 0; j < 10; j++) {
+    for (j = 0; j < 100000; j++) {
         var clickedLocation = Math.floor(Math.random() * (puzzleCurrentState.length));
         if (puzzleCurrentState[clickedLocation] !== ' ') {
             if (blankInRow(clickedLocation)) {
