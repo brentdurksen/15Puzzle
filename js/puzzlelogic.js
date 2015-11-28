@@ -11,13 +11,6 @@ $(function() {
 /* Initialize our puzzle */
     initPuzzle();
 
-    /* Shuffle it up!
-    for (i = 0; i < 100; i++) {
-        var clickLoc = Math.floor(Math.random() * (puzzleCurrentState.length));
-        $("#td" + clickLoc).trigger("click");
-        console.log(clickLoc);
-    }    */
-    
 /* Process clicks */
     $(".puzzle-piece").click(function() { 
         var clickedLocation = Number(event.target.id.replace('td',''));
@@ -55,21 +48,17 @@ function initPuzzle() {
 }
 
 function shufflePuzzle() {
-    console.log("I'm shuffling now");
-    var shuffleCount = 0;
-    for (i = 0; i < 50; i++) {
+    /* 'Click' at random 100,000 times */
+    for (j = 0; j < 100000; j++) {
         var clickedLocation = Math.floor(Math.random() * (puzzleCurrentState.length));
-        if (puzzleCurrentState[clickedLocation] === ' ') {  continue;
-        } else {
+        if (puzzleCurrentState[clickedLocation] !== ' ') {
             if (blankInRow(clickedLocation)) {
                 rearrangeRow(clickedLocation);
             } else if (blankInColumn(clickedLocation)) {
                 rearrangeCol(clickedLocation);
             }
         }
-        shuffleCount = shuffleCount+1;
-        }
-    console.log(shuffleCount);
+    }
 }
 
 function blankInRow(clickedLoc) {
@@ -87,7 +76,6 @@ function blankInColumn(clickedLoc) {
 function rearrangeRow(clickedLocation) {
     puzzleCurrentState = _.without(puzzleCurrentState, ' ');
     puzzleCurrentState.splice(clickedLocation, 0, ' ');
-    return;
 }
 
 function rearrangeCol(clickedLocation) {
@@ -103,5 +91,4 @@ function rearrangeCol(clickedLocation) {
     for (i = 0; i < puzzleHeight; i++) {
         puzzleCurrentState[currColumn+(puzzleHeight*i)] = colCurrentState[i];
     }
-    return;
 }
