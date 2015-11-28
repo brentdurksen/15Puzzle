@@ -1,6 +1,7 @@
 var puzzleSolvedState = [];
 var puzzleCurrentState = [];
 var puzzleHeight = 4;
+var clockRunning = false;
 /* Grid coordinates to check against 2D puzzle array */
 /* TODO: Generate map programmatically based on variable puzzleHeight */
 var rowColMap = [[0,0], [0,1], [0,2], [0,3], [1,0], [1,1], [1,2], [1,3],
@@ -11,12 +12,19 @@ $(function() {
 /* Initialize our puzzle */
     initPuzzle();
 
+/* Set up the clock */
+    $('#runner').runner();
+
 /* Process clicks */
     $(".puzzle-piece").click(function() { 
         var clickedLocation = Number(event.target.id.replace('td',''));
         
         if (puzzleCurrentState[clickedLocation] === ' ') { return;
         } else {
+            if (!clockRunning) {
+                $('#runner').runner('start');
+                clockRunning = true;
+               }
             if (blankInRow(clickedLocation)) {
                 rearrangeRow(clickedLocation);
             } else if (blankInColumn(clickedLocation)) {
@@ -24,11 +32,16 @@ $(function() {
             } 
             /* TODO: We probably don't need to update the whole page every time! */
             for (i = 0; i < puzzleCurrentState.length; i ++) {
-                $ ("#td" + i).text(puzzleCurrentState[i]);
+                $("#td" + i).text(puzzleCurrentState[i]);
+                if (puzzleCurrentState[i] === puzzleSolvedState[i]) {
+                    $("#td" + i).addClass("bg-success");
+                } else { $("#td" + i).removeClass("bg-success"); }
             }
             /* Did you win!? */
             if (_.isEqual(puzzleCurrentState, puzzleSolvedState)) {
-                alert("You win!")
+                $('#runner').runner('stop');
+                clockRunning = false;
+                $('#runner').text("You win!")
             }
         }
     });
@@ -44,6 +57,8 @@ function initPuzzle() {
     shufflePuzzle();
     $(".puzzle-piece").each(function(index) {
         $(this).text(puzzleCurrentState[index]);
+        if (puzzleCurrentState[index] === puzzleSolvedState[index]) {
+            $(this).addClass("bg-success"); }
     });
 }
 
