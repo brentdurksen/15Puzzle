@@ -27,7 +27,7 @@ $(function() {
                 $ ("#td" + i).text(puzzleCurrentState[i]);
             }
             /* Did you win!? */
-            if (puzzleCurrentState === puzzleSolvedState) {
+            if (_.isEqual(puzzleCurrentState, puzzleSolvedState)) {
                 alert("You win!")
             }
         }
@@ -38,7 +38,7 @@ $(function() {
 function initPuzzle() {
     puzzleSolvedState = _.range(1, 16);
     puzzleSolvedState.push(' ');
-    puzzleCurrentState = puzzleSolvedState;
+    puzzleCurrentState = puzzleSolvedState.slice();
     /* This can lead to unsolvable puzzles:
     puzzleCurrentState = _.shuffle(puzzleSolvedState); */
     shufflePuzzle();
@@ -49,7 +49,7 @@ function initPuzzle() {
 
 function shufflePuzzle() {
     /* 'Click' at random 100,000 times */
-    for (j = 0; j < 100000; j++) {
+    for (j = 0; j < 10; j++) {
         var clickedLocation = Math.floor(Math.random() * (puzzleCurrentState.length));
         if (puzzleCurrentState[clickedLocation] !== ' ') {
             if (blankInRow(clickedLocation)) {
