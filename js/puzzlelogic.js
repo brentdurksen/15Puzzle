@@ -2,10 +2,7 @@ var puzzleSolvedState = [];
 var puzzleCurrentState = [];
 var puzzleHeight = 4;
 var clockRunning = false;
-/* Grid coordinates to check against 2D puzzle array */
-/* TODO: Generate map programmatically based on variable puzzleHeight */
-var rowColMap = [[0,0], [0,1], [0,2], [0,3], [1,0], [1,1], [1,2], [1,3],
-        [2,0], [2,1], [2,2], [2,3], [3,0], [3,1], [3,2], [3,3]];
+var rowColMap = [];
 
 $(function() {
     
@@ -49,16 +46,37 @@ $(function() {
 });
 
 function initPuzzle() {
-    puzzleSolvedState = _.range(1, 16);
+    for (i = 0; i < puzzleHeight; i++) {
+        for (j = 0; j < puzzleHeight; j++) {
+            rowColMap.push([i, j]);
+        }
+    }
+
+    puzzleSolvedState = _.range(1, Math.pow(puzzleHeight, 2));
     puzzleSolvedState.push(' ');
     puzzleCurrentState = puzzleSolvedState.slice();
     /* This can lead to unsolvable puzzles:
     puzzleCurrentState = _.shuffle(puzzleSolvedState); */
     shufflePuzzle();
+
+    var tableHTML = '<table class="table table-bordered text-center">';
+    for (i = 0; i < puzzleHeight; i++) {
+        tableHTML += '<tr id="tr' + i + '">';
+        for (j = 0; j < puzzleHeight; j++) {
+            var currID = (i*puzzleHeight) + j;
+            console.log(currID);
+            tableHTML += '<td id="td' + currID + '" class="puzzle-piece"></td>';
+        }
+        tableHTML += '</tr>';
+    }
+    tableHTML += '</table>';
+
+    $( "#puzzletable" ).append(tableHTML);
+
     $(".puzzle-piece").each(function(index) {
-        $(this).text(puzzleCurrentState[index]);
-        if (puzzleCurrentState[index] === puzzleSolvedState[index]) {
-            $(this).addClass("bg-success"); }
+    $(this).text(puzzleCurrentState[index]);
+    if (puzzleCurrentState[index] === puzzleSolvedState[index]) {
+        $(this).addClass("bg-success"); }
     });
 }
 
