@@ -16,48 +16,47 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/underscore-min.js"></script>
-    <script src="js/puzzlelogic.js"></script>
   </head>
   <body>
     <div class="container">
-        <div class="jumbotron"><h1>15 Puzzle</h1></div>
-    <div class="table-responsive">
-      <table class="table table-bordered text-center">
-      <tr id="tr1">
-          <td id="td0" class="puzzle-piece"></td>
-          <td id="td1" class="puzzle-piece"></td>
-          <td id="td2" class="puzzle-piece"></td>
-          <td id="td3" class="puzzle-piece"></td>
-      </tr>
-      <tr id="tr2">
-          <td id="td4" class="puzzle-piece"></td>
-          <td id="td5" class="puzzle-piece"></td>
-          <td id="td6" class="puzzle-piece"></td>
-          <td id="td7" class="puzzle-piece"></td>
-      </tr>
-      <tr id="tr3">
-          <td id="td8" class="puzzle-piece"></td>
-          <td id="td9" class="puzzle-piece"></td>
-          <td id="td10" class="puzzle-piece"></td>
-          <td id="td11" class="puzzle-piece"></td>
-      </tr>
-    <tr id="tr4">
-          <td id="td12" class="puzzle-piece"></td>
-          <td id="td13" class="puzzle-piece"></td>
-          <td id="td14" class="puzzle-piece"></td>
-          <td id="td15" class="puzzle-piece"></td>
-      </tr>
-      </table>
-      
-      </div>
-      </div>
-      
+        <div class="jumbotron text-center"><h1 id="runner"></h1></div>
+        <div id="puzzletable" class="table-responsive">
+          <table class="table table-bordered text-center">
+          <tr id="tr1">
+              <td id="td0" class="puzzle-piece"></td>
+              <td id="td1" class="puzzle-piece"></td>
+              <td id="td2" class="puzzle-piece"></td>
+              <td id="td3" class="puzzle-piece"></td>
+          </tr>
+          <tr id="tr2">
+              <td id="td4" class="puzzle-piece"></td>
+              <td id="td5" class="puzzle-piece"></td>
+              <td id="td6" class="puzzle-piece"></td>
+              <td id="td7" class="puzzle-piece"></td>
+          </tr>
+          <tr id="tr3">
+              <td id="td8" class="puzzle-piece"></td>
+              <td id="td9" class="puzzle-piece"></td>
+              <td id="td10" class="puzzle-piece"></td>
+              <td id="td11" class="puzzle-piece"></td>
+          </tr>
+          <tr id="tr4">
+              <td id="td12" class="puzzle-piece"></td>
+              <td id="td13" class="puzzle-piece"></td>
+              <td id="td14" class="puzzle-piece"></td>
+              <td id="td15" class="puzzle-piece"></td>
+          </tr>
+          </table>
 
+          </div>
+      </div>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src='js/jquery.runner-min.js'></script>
+    <script src="js/puzzlelogic.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
